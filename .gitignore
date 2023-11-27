@@ -1,0 +1,4 @@
+spam-venv/bin
+spam-venv/lib*
+spam-venv/share
+spam-venv/include

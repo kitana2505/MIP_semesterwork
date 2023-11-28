@@ -61,8 +61,8 @@ if __name__=="__main__":
     ]
     vxm_model = vxm.networks.VxmDense(inshape, nb_features, int_steps=0)
 
-    print('input shape: ', ', '.join([str(t.shape) for t in vxm_model.inputs]))
-    print('output shape:', ', '.join([str(t.shape) for t in vxm_model.outputs]))
+    # print('input shape: ', ', '.join([str(t.shape) for t in vxm_model.inputs]))
+    # print('output shape:', ', '.join([str(t.shape) for t in vxm_model.outputs]))
 
     # voxelmorph has a variety of custom loss classes
     losses = [vxm.losses.MSE().loss, vxm.losses.Grad('l2').loss]
@@ -86,9 +86,10 @@ if __name__=="__main__":
     # Add the ModelCheckpoint callback to the list of callbacks
     callbacks_list = [checkpoint]
 
-
     nb_epochs = 100
     steps_per_epoch = 100
+
+    print("[INFO] Start training....")
     hist = vxm_model.fit(train_generator, 
     epochs=nb_epochs, steps_per_epoch=steps_per_epoch, 
     callbacks=callbacks_list,

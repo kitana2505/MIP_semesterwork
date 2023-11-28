@@ -67,7 +67,7 @@ idx = np.random.choice(train_data.shape[0], nb_vis, replace=False)
 examples = [f for f in train_data[idx, ...]]
 
 # plot
-ne.plot.slices(examples, cmaps=['gray'], do_colorbars=True);
+ne.plot.slices(examples, cmaps=['gray'], do_colorbars=True)
 
 def train_test_split(dataset, val_per=0.05, seed=32):
   np.random.seed(seed)
@@ -149,7 +149,7 @@ in_sample, out_sample = next(train_generator)
 # visualize
 images = [img[0, :, :, 0] for img in in_sample + out_sample]
 titles = ['moving', 'fixed', 'moved ground-truth (fixed)', 'zeros']
-ne.plot.slices(images, titles=titles, cmaps=['gray'], do_colorbars=True);
+ne.plot.slices(images, titles=titles, cmaps=['gray'], do_colorbars=True)
 
 nb_epochs = 100
 steps_per_epoch = 100

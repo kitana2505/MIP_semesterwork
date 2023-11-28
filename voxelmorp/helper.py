@@ -34,6 +34,9 @@ def train_test_split(dataset, val_per=0.05, seed=32):
   x_train = dataset[:num_train] / 255.0
   x_val = dataset[num_train:] / 255.0
 
+  np.random.shuffle(x_train)
+  np.random.shuffle(x_val)
+
   print(f"Training data: {len(x_train)} samples")
   print(f"Validation data: {len(x_val)} samples")
 

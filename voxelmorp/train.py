@@ -10,8 +10,9 @@ import voxelmorph as vxm
 import neurite as ne
 from keras.callbacks import ModelCheckpoint
 from helper import load_data, train_test_split
+import datetime
 
-def vxm_data_generator(x_data, batch_size=8):
+def vxm_data_generator(x_data, batch_size=32):
     """
     Generator that takes in data of size [N, H, W], and yields data for
     our custom vxm model. Note that we need to provide numpy data for each
@@ -54,6 +55,7 @@ if __name__=="__main__":
     
     # build model using VxmDense
     inshape = x_train.shape[1:]
+
     # configure unet features
     nb_features = [
         [32, 32, 32, 32],         # encoder features
@@ -73,21 +75,25 @@ if __name__=="__main__":
 
     vxm_model.compile(optimizer='Adam', loss=losses, loss_weights=loss_weights)
 
-    train_generator = vxm_data_generator(x_train)
+    batch_size = 16
+    train_generator = vxm_data_generator(x_train, batch_size)
 
     checkpoint = ModelCheckpoint(
         'voxel_morp.h5',  # Filepath to save the model
-        monitor='loss',  # Monitor validation loss
+        monitor='loss',  # Monitor training loss
         save_best_only=True,  # Save only the best models
         mode='min',  # Save the model when the monitored quantity is minimized
         verbose=1  # 1: display messages, 0: silent
     )
 
+    log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
+
     # Add the ModelCheckpoint callback to the list of callbacks
-    callbacks_list = [checkpoint]
+    callbacks_list = [checkpoint, tensorboard_callback]
 
     nb_epochs = 100
-    steps_per_epoch = 100
+    steps_per_epoch = len(x_train) // batch_size
 
     print("[INFO] Start training....")
     hist = vxm_model.fit(train_generator, 

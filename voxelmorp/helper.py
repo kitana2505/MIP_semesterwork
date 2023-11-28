@@ -5,7 +5,7 @@ import os
 from tqdm import tqdm
 import ipdb; 
 
-def load_data(img_directory, resize_height=128):
+def load_data(img_directory, resize_height=256):
   train_data = []
 
   # Get paths of all images

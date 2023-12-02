@@ -49,7 +49,7 @@ if __name__ == "__main__":
         loss = (moved_frame - fix_frame)**2
         squared_error.append(np.sum(loss))
 
-        video_frame = cv2.cvtColor(moved_frame[0,:,:,0], cv2.COLOR_GRAY2BGR) * 255        
+        video_frame = cv2.cvtColor(moved_frame, cv2.COLOR_GRAY2BGR) * 255        
         out.write(np.uint8(video_frame))
     
     print(f"Mean square error: {sum(squared_error) / len(squared_error)}")

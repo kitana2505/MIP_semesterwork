@@ -9,9 +9,11 @@ from tqdm import tqdm
 import voxelmorph as vxm
 import neurite as ne
 from keras.callbacks import ModelCheckpoint
-from helper import load_data, train_test_split
 import datetime
 import ipdb
+import sys
+sys.path.append("/home.stud/quangthi/ws/semester_work")
+from helper import load_data, train_test_split
 
 RESIZE_HEIGHT = 128
 

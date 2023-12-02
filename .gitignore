@@ -2,3 +2,7 @@ spam-venv/bin
 spam-venv/lib*
 spam-venv/share
 spam-venv/include
+*.pyc
+*/spam_venv
+**/__pycache__
+*/logs

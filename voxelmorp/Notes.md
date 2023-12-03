@@ -32,4 +32,7 @@ mse = np.mean(se)
 
 ## Virutal environment
 - Isolated environment that you can install specific packages and library 
-- 
+- How to create virtual environment in python:
+    - python built-in ve
+    - conda -> easier to maintain multiple environments
+    - docker

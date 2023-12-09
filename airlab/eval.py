@@ -10,6 +10,8 @@ from helper import load_data
 import airlab as al
 import torch
 import pickle
+import json
+import time
 
 RESIZE_HEIGHT = 128
 
@@ -45,7 +47,9 @@ if __name__ == "__main__":
     registration = al.PairwiseRegistration()
 
     squared_error = list()
+    duration = []
     for move_frame in tqdm(val_data[1:]):
+        start = time.perf_counter()
         move_frame_al = al.image_from_numpy(move_frame, [1, 1], [0, 0], dtype=dtype, device=device)
 
         fixed_frame, moving_frame = al.utils.normalize_images(fix_frame_al, move_frame_al)
@@ -80,18 +84,25 @@ if __name__ == "__main__":
         # warp the moving image with the final transformation result
         displacement = transformation.get_displacement()
         moved_frame = al.transformation.utils.warp_image(moving_frame, displacement)
+        duration.append(time.perf_counter() - start)
 
         moved_frame = moved_frame.numpy()
 
         loss = (moved_frame - fix_frame)**2
         squared_error.append(np.sum(loss))
 
-        with open("loss.pkl", "wa") as file:
-            file.write(str(squared_error[-1]) + "\n")
-
         # ipdb.set_trace()
         video_frame = cv2.cvtColor(moved_frame, cv2.COLOR_GRAY2BGR) * 255        
         out.write(np.uint8(video_frame))
     
-    print(f"Mean square error: {sum(squared_error) / len(squared_error)}")
+
+    fps = sum(duration) / len(duration)
+    mse = sum(squared_error) / len(squared_error)
+    print(f"Mean square error: {mse}")
+    print(f"Frame per second: {fps}")
+
+    saved_dict = {"frame_loss" : squared_error, "mse": mse, "fps": fps}
+
+    with open("mse.json", 'w') as file:
+        json.dump(saved_dict, file, indent=4)
     

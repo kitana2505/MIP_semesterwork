@@ -4,8 +4,9 @@ import ipdb
 from tqdm import tqdm
 import os
 import sys
-sys.path.append("/home.stud/quangthi/ws/semester_work")
-from helper import load_data
+sys.path.append("/home.stud/quangthi/ws/semester_work/mutual")
+from generate_synthetic_img import generate_image
+
 import airlab as al
 import torch
 import pickle
@@ -14,10 +15,12 @@ import time
 import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw
 
+num_iter = 1000
 x_trans = 10
 y_trans = 0
-rot_angle = 0
+rot_angle = 1
 alpha = 0.5
+sc = 1
 
 cm_red = plt.get_cmap('Reds')
 cm_green = plt.get_cmap("Greens")
@@ -27,10 +30,20 @@ if __name__=="__main__":
     dtype = torch.float32
     device = torch.device("cuda:0")
 
+    returned_dict = generate_image(x_trans, y_trans, rot_angle, sc)
+    img_fix_with_kp = returned_dict['img_fix_with_kp']
+    fixed_image_ori = al.image_from_numpy(returned_dict['img_fix'], [1, 1], [0, 0], dtype=dtype, device=device)
+    moving_image_ori = al.image_from_numpy(returned_dict['img_moving'], [1, 1], [0, 0], dtype=dtype, device=device)
+    img_move_with_kp = al.image_from_numpy(returned_dict['img_move_with_kp'], [1, 1], [0, 0], dtype=dtype, device=device)
 
-    fixed_image_ori = al.read_image_as_tensor(os.path.join(data_root, "fix.png"), dtype=dtype, device=device)
-    moving_image_ori = al.read_image_as_tensor(os.path.join(data_root, "moving.png"), dtype=dtype, device=device)
-    img_move_with_kp = al.read_image_as_tensor(os.path.join(data_root, "img_move_with_kp.png"), dtype=dtype, device=device)
+    # fixed_image = detect_keypoint.load_data("fix.png")
+
+    # fixed_image_ori = al.read_image_as_tensor(os.path.join(data_root, "fix.png"), dtype=dtype, device=device)
+
+
+    # moving_image_ori = al.read_image_as_tensor(os.path.join(data_root, "moving.png"), dtype=dtype, device=device)
+
+    # img_move_with_kp = al.read_image_as_tensor(os.path.join(data_root, "img_move_with_kp.png"), dtype=dtype, device=device)
 
     # ipdb.set_trace()
 
@@ -61,7 +74,7 @@ if __name__=="__main__":
     optimizer = torch.optim.Adam(transformation.parameters(), lr=0.01, amsgrad=True)
 
     registration.set_optimizer(optimizer)
-    registration.set_number_of_iterations(1000)
+    registration.set_number_of_iterations(num_iter)
 
     # start the registration
     registration.start()
@@ -78,14 +91,14 @@ if __name__=="__main__":
     warped_image = al.transformation.utils.warp_image(img_move_with_kp, displacement)
     img_transformed = warped_image.image.to('cpu').numpy()[0,0]
 
-    img_fix_with_kp = cv2.imread(os.path.join(data_root, "img_fix_with_kp.png"), cv2.IMREAD_GRAYSCALE)
     img_fix_red_with_kp = cm_red(img_fix_with_kp)
     img_move_green_with_kp = cm_green(img_transformed)
     overlay_image = cv2.addWeighted(img_fix_red_with_kp, 1 - alpha, img_move_green_with_kp, alpha, 0)
 
-    Image.fromarray((overlay_image[:, :, :3] * 255).astype(np.uint8)).save('overlay.png')
-    ipdb.set_trace()
+    saved_path = "./overlay_airlab.png"
+    Image.fromarray((overlay_image[:, :, :3] * 255).astype(np.uint8)).save(saved_path)
 
+    print(f"Image is saved at {saved_path}")
 
     # cv2.imwrite("out.png", img_transformed*255)
 

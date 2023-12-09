@@ -10,6 +10,8 @@ from glob import glob
 import sys
 sys.path.append("/home.stud/quangthi/ws/semester_work")
 from helper import load_data
+import json
+import time 
 
 RESIZE_HEIGHT = 128
 
@@ -35,7 +37,10 @@ if __name__ == "__main__":
     out = cv2.VideoWriter('output_spam.avi', fourcc, 20.0, new_size)
 
     squared_error = list()
+    duration = list()
     for move_frame in tqdm(val_data[1:]):
+        start = time.perf_counter()
+        
         Phi = spam.DIC.register(
                 move_frame, fix_frame,
                 margin=10,
@@ -44,13 +49,23 @@ if __name__ == "__main__":
                 verbose=True
             )
         
-        moved_frame = spam.DIC.deform.applyPhiPython(move_frame, Phi=Phi)
-
+        moved_frame = spam.DIC.deform.applyPhiPython(move_frame, Phi=Phi['Phi'])
+        duration.append(time.perf_counter() - start)
+        
         loss = (moved_frame - fix_frame)**2
         squared_error.append(np.sum(loss))
 
         video_frame = cv2.cvtColor(moved_frame, cv2.COLOR_GRAY2BGR) * 255        
         out.write(np.uint8(video_frame))
     
-    print(f"Mean square error: {sum(squared_error) / len(squared_error)}")
+    fps = sum(duration) / len(duration)
+    mse = sum(squared_error) / len(squared_error)
+    print(f"Mean square error: {mse}")
+    print(f"Frame per second: {fps}")
+
+    saved_dict = {"frame_loss" : squared_error, "mse": mse, "fps": fps}
+
+    with open("mse.json", 'w') as file:
+        json.dump(saved_dict, file, indent=4)
+    
     

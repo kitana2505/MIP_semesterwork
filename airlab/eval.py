@@ -89,7 +89,7 @@ if __name__ == "__main__":
         moved_frame = moved_frame.numpy()
 
         loss = (moved_frame - fix_frame)**2
-        squared_error.append(np.sum(loss))
+        squared_error.append(np.mean(loss))
 
         # ipdb.set_trace()
         video_frame = cv2.cvtColor(moved_frame, cv2.COLOR_GRAY2BGR) * 255        

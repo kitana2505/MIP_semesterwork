@@ -53,7 +53,7 @@ if __name__ == "__main__":
         duration.append(time.perf_counter() - start)
         
         loss = (moved_frame - fix_frame)**2
-        squared_error.append(np.sum(loss))
+        squared_error.append(np.mean(loss))
 
         video_frame = cv2.cvtColor(moved_frame, cv2.COLOR_GRAY2BGR) * 255        
         out.write(np.uint8(video_frame))

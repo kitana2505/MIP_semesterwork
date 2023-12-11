@@ -32,9 +32,14 @@ if __name__=="__main__":
 
     returned_dict = generate_image(x_trans, y_trans, rot_angle, sc)
     img_fix_with_kp = returned_dict['img_fix_with_kp']
-    fixed_image_ori = al.image_from_numpy(returned_dict['img_fix'], [1, 1], [0, 0], dtype=dtype, device=device)
-    moving_image_ori = al.image_from_numpy(returned_dict['img_moving'], [1, 1], [0, 0], dtype=dtype, device=device)
-    img_move_with_kp = al.image_from_numpy(returned_dict['img_move_with_kp'], [1, 1], [0, 0], dtype=dtype, device=device)
+
+    # fixed_image_ori = al.image_from_numpy(returned_dict['img_fix'], [1, 1], [0, 0], dtype=dtype, device=device)
+    # moving_image_ori = al.image_from_numpy(returned_dict['img_moving'], [1, 1], [0, 0], dtype=dtype, device=device)
+
+    fixed_image_ori = al.image_from_numpy(returned_dict['img_fix_with_kp'], [1, 1], [0, 0], dtype=dtype, device=device)
+    moving_image_ori = al.image_from_numpy(returned_dict['img_move_with_kp'], [1, 1], [0, 0], dtype=dtype, device=device)
+
+    # img_move_with_kp = al.image_from_numpy(returned_dict['img_move_with_kp'], [1, 1], [0, 0], dtype=dtype, device=device)
 
     # fixed_image = detect_keypoint.load_data("fix.png")
 
@@ -86,9 +91,11 @@ if __name__=="__main__":
     # warp the moving image with the final transformation result
     displacement = transformation.get_displacement()
 
-    _, img_move_with_kp = al.utils.normalize_images(moving_image, img_move_with_kp)
-    
-    warped_image = al.transformation.utils.warp_image(img_move_with_kp, displacement)
+    # _, img_move_with_kp = al.utils.normalize_images(moving_image, img_move_with_kp)
+    # warped_image = al.transformation.utils.warp_image(img_move_with_kp, displacement)
+
+
+    warped_image = al.transformation.utils.warp_image(moving_image, displacement)
     img_transformed = warped_image.image.to('cpu').numpy()[0,0]
 
     img_fix_red_with_kp = cm_red(img_fix_with_kp)

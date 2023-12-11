@@ -39,10 +39,10 @@ def main():
     device = th.device("cuda:0")
 
     # load the image data and normalize to [0, 1]
-    # fixed_image = al.read_image_as_tensor("./data/affine_test_image_2d_fixed.png", dtype=dtype, device=device)
-    # moving_image = al.read_image_as_tensor("./data/affine_test_image_2d_moving.png", dtype=dtype, device=device)
-    fixed_image = al.read_image_as_tensor("./data/fix.png", dtype=dtype, device=device)
-    moving_image = al.read_image_as_tensor("./data/moving_img_rot.png", dtype=dtype, device=device)
+    fixed_image = al.read_image_as_tensor("./data/affine_test_image_2d_fixed.png", dtype=dtype, device=device)
+    moving_image = al.read_image_as_tensor("./data/affine_test_image_2d_moving.png", dtype=dtype, device=device)
+    # fixed_image = al.read_image_as_tensor("./data/fix.png", dtype=dtype, device=device)
+    # moving_image = al.read_image_as_tensor("./data/moving_img_rot.png", dtype=dtype, device=device)
 
     fixed_image, moving_image = al.utils.normalize_images(fixed_image, moving_image)
 
@@ -83,7 +83,7 @@ def main():
     displacement = transformation.get_displacement()
     warped_image = al.transformation.utils.warp_image(moving_image, displacement)
 
-    import ipdb; ipdb.set_trace()
+    # import ipdb; ipdb.set_trace()
     plt.imshow(warped_image.numpy(), cmap="gray")
     plt.savefig("warped.png")
     

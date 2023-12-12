@@ -30,11 +30,14 @@ if __name__ == "__main__":
     new_size = (resize_width, RESIZE_HEIGHT)
 
     # load data
-    val_data = load_data(val_data_paths, resize=new_size)
-
+    # val_data = load_data(val_data_paths, resize=new_size)
+    val_data = load_data(val_data_paths)
+    # ipdb.set_trace()
     fix_frame = val_data[0]
+    frame_height, frame_width = fix_frame.shape[:2]
+    frame_size = tuple(map(int, [frame_width, frame_height]))
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    out = cv2.VideoWriter('output_spam.avi', fourcc, 20.0, new_size)
+    out = cv2.VideoWriter('output_spam.avi', fourcc, 20.0, frame_size)
 
     squared_error = list()
     duration = list()
@@ -45,7 +48,7 @@ if __name__ == "__main__":
                 move_frame, fix_frame,
                 margin=10,
                 maxIterations=300,
-                deltaPhiMin=0.001,
+                deltaPhiMin=0.01,
                 verbose=True
             )
         

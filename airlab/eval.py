@@ -35,11 +35,13 @@ if __name__ == "__main__":
     new_size = (resize_width, RESIZE_HEIGHT)
 
     # load data
-    val_data = load_data(val_data_paths, resize=new_size)
-
+    # val_data = load_data(val_data_paths, resize=new_size)
+    val_data = load_data(val_data_paths)
     fix_frame = val_data[0]
+    frame_height, frame_width = fix_frame.shape[:2]
+    frame_size = tuple(map(int, [frame_width, frame_height]))
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    out = cv2.VideoWriter('output_airlab.avi', fourcc, 20.0, new_size)
+    out = cv2.VideoWriter('output_airlab.avi', fourcc, 20.0, frame_size)
 
     fix_frame_al = al.image_from_numpy(fix_frame, [1, 1], [0, 0], dtype=dtype, device=device)
     

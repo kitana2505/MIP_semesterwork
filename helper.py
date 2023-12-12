@@ -5,14 +5,16 @@ import os
 from tqdm import tqdm
 import ipdb; 
 
-def load_data(data_paths, resize, shuffle=False, seed=32):
+def load_data(data_paths, resize=None, shuffle=False, seed=32):
   np.random.seed(seed)
   img_data = []
   # read, resize and append image
   for path in data_paths:
     img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
-    img_resize = cv2.resize(img, resize)
-    img_data.append(img_resize/255.0)
+    if resize != None:
+      img = cv2.resize(img, resize)
+
+    img_data.append(img/255.0)
 
   img_data = np.array(img_data)
 

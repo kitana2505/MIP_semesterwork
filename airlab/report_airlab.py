@@ -6,6 +6,8 @@ import os
 import sys
 sys.path.append("/home.stud/quangthi/ws/semester_work/mutual")
 from generate_synthetic_img import generate_image
+from generate_synthetic_img import plot_overlay
+from generate_synthetic_img import save_info
 
 import airlab as al
 import torch
@@ -15,15 +17,16 @@ import time
 import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw
 
-num_iter = 1000
+num_iter = 10
 x_trans = 10
-y_trans = 0
-rot_angle = 1
+y_trans = 5
+rot_angle = 4
 alpha = 0.5
 sc = 1
 
 cm_red = plt.get_cmap('Reds')
 cm_green = plt.get_cmap("Greens")
+RESIZE_HEIGHT = 128
 
 if __name__=="__main__":
     data_root = "/home.stud/quangthi/ws/data/segreg_anh"
@@ -31,12 +34,17 @@ if __name__=="__main__":
     device = torch.device("cuda:0")
 
     returned_dict = generate_image(x_trans, y_trans, rot_angle, sc)
+    overlay_ori = plot_overlay(returned_dict['img_fix_with_kp'], returned_dict['img_move_with_kp'], saved_path="overlay_ori.png")
+    
     img_fix_with_kp = returned_dict['img_fix_with_kp']
-
+    img_move_with_kp = al.image_from_numpy(returned_dict['img_move_with_kp'], [1, 1], [0, 0], dtype=dtype, device=device)
     # fixed_image_ori = al.image_from_numpy(returned_dict['img_fix'], [1, 1], [0, 0], dtype=dtype, device=device)
     # moving_image_ori = al.image_from_numpy(returned_dict['img_moving'], [1, 1], [0, 0], dtype=dtype, device=device)
-
+   
+    #fixed_image_ori = al.image_from_numpy(returned_dict['img_fix_with_kp'], [1, 1], [0, 0], dtype=dtype, device=device)
     fixed_image_ori = al.image_from_numpy(returned_dict['img_fix_with_kp'], [1, 1], [0, 0], dtype=dtype, device=device)
+
+    #moving_image_ori = al.image_from_numpy(returned_dict['img_move_with_kp'], [1, 1], [0, 0], dtype=dtype, device=device)
     moving_image_ori = al.image_from_numpy(returned_dict['img_move_with_kp'], [1, 1], [0, 0], dtype=dtype, device=device)
 
     # img_move_with_kp = al.image_from_numpy(returned_dict['img_move_with_kp'], [1, 1], [0, 0], dtype=dtype, device=device)
@@ -63,8 +71,10 @@ if __name__=="__main__":
     registration = al.PairwiseRegistration()
 
     # choose the affine transformation model
-    transformation = al.transformation.pairwise.SimilarityTransformation(moving_image, opt_cm=True)
-
+    #transformation = al.transformation.pairwise.SimilarityTransformation(moving_image, opt_cm=True)
+    transformation = al.transformation.pairwise.RigidTransformation(moving_image, opt_cm=True)
+    #move_temp = transformation.set_parameters([x_trans,y_trans],[np.deg2rad(rot_angle)])
+    #ipdb.set_trace()
     # initialize the translation with the center of mass of the fixed image
     transformation.init_translation(fixed_image)
 
@@ -90,12 +100,13 @@ if __name__=="__main__":
 
     # warp the moving image with the final transformation result
     displacement = transformation.get_displacement()
+    #ipdb.set_trace()
 
     # _, img_move_with_kp = al.utils.normalize_images(moving_image, img_move_with_kp)
     # warped_image = al.transformation.utils.warp_image(img_move_with_kp, displacement)
 
 
-    warped_image = al.transformation.utils.warp_image(moving_image, displacement)
+    warped_image = al.transformation.utils.warp_image(moving_image_ori, displacement)
     img_transformed = warped_image.image.to('cpu').numpy()[0,0]
 
     img_fix_red_with_kp = cm_red(img_fix_with_kp)
@@ -106,7 +117,10 @@ if __name__=="__main__":
     Image.fromarray((overlay_image[:, :, :3] * 255).astype(np.uint8)).save(saved_path)
 
     print(f"Image is saved at {saved_path}")
-
+    dist = al.transformation.utils.unit_displacement_to_displacement(displacement)
+    print('Displacement: ',np.mean(np.mean(np.array(dist.cpu()),0),0))
+    dist_temp = np.mean(np.mean(np.array(dist.cpu()),0),0)
+    save_info(x_trans,y_trans,rot_angle,sc,"TODO","airlab",dist_temp)
     # cv2.imwrite("out.png", img_transformed*255)
 
     # plt.figure(3)    

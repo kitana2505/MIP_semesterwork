@@ -1,0 +1,14 @@
+Translation x: %d
+Translation y: %d
+Rotation: %d
+MSE: %d 
+Displacemnet: %s % x_trans % y_trans % rot_angle % mse %str(option1)Translation x: 10
+Translation y: 5
+Rotation: 4
+MSE: TODO 
+Displacemnet: [4.016108  3.9839344]Translation x: 10
+Translation y: 5
+Rotation: 4
+MSE: TODO 
+Displacemnet: [4.016108  3.9839344]
+ -------------------------

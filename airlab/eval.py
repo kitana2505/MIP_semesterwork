@@ -19,7 +19,7 @@ if __name__ == "__main__":
 
     dtype = torch.float32
     device = torch.device("cuda:0")
-    iterations = 500
+    iterations = 10000
 
     val_data_root = "/home.stud/quangthi/ws/data/Sada_val"
    
@@ -60,7 +60,9 @@ if __name__ == "__main__":
         moving_frame.image = 1 - moving_frame.image
 
         # choose the affine transformation model
-        transformation = al.transformation.pairwise.SimilarityTransformation(moving_frame, opt_cm=True)
+        #transformation = al.transformation.pairwise.SimilarityTransformation(moving_frame, opt_cm=True)
+        transformation = al.transformation.pairwise.RigidTransformation(moving_frame, opt_cm=True)
+
         # initialize the translation with the center of mass of the fixed image
         transformation.init_translation(fixed_frame)
 

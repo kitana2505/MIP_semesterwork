@@ -2,7 +2,7 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 # Load the JSON file
-with open('/home.stud/quangthi/ws/semester_work/airlab/mse_synthetic.json') as f:
+with open('/home.stud/quangthi/ws/semester_work/voxelmorp/mse_synthetic.json') as f:
     data = json.load(f)
 
 # Extract the values from the dictionary
@@ -28,12 +28,12 @@ ax2.set_xlabel('Rotation angle (degree)')
 ax2.set_ylabel('Mean Squared Error')
 
 
-fig.suptitle('Airlab Registration Loss')
+fig.suptitle('Voxelmorph Registration Loss')
 # Adjust spacing between subplots
 plt.tight_layout()
 
 # Save the figure
-plt.savefig('mse_synthetic_airlab.png')
+plt.savefig('mse_synthetic_voxelmorph.png')
 
 # Show the figure
 plt.show()

@@ -12,3 +12,333 @@ Rotation: 4
 MSE: TODO 
 Displacemnet: [4.016108  3.9839344]
  -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 3
+MSE: TODO 
+Displacemnet: [9.796715 5.038317]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 4
+MSE: TODO 
+Displacemnet: [9.800103  5.0293045]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 5
+MSE: TODO 
+Displacemnet: [3.0417871 4.054251 ]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 4
+MSE: TODO 
+Displacemnet: [9.800103  5.0293045]
+ -------------------------
+Translation x: 15
+Translation y: 5
+Rotation: 0
+MSE: TODO 
+Displacemnet: [ 2.5070539 -1.5221287]
+ -------------------------
+Translation x: 0
+Translation y: 0
+Rotation: 4
+MSE: TODO 
+Displacemnet: [-0.13039254  0.08985619]
+ -------------------------
+Translation x: 0
+Translation y: 0
+Rotation: 4
+MSE: TODO 
+Displacemnet: [-0.09321877  0.11814822]
+ -------------------------
+Translation x: 0
+Translation y: 0
+Rotation: 4
+MSE: TODO 
+Displacemnet: [-0.13039254  0.08985619]
+ -------------------------
+Translation x: 0
+Translation y: 0
+Rotation: 5
+MSE: TODO 
+Displacemnet: [-0.17926349  0.05130416]
+ -------------------------
+Translation x: 0
+Translation y: 0
+Rotation: 6
+MSE: TODO 
+Displacemnet: [-0.19164084  0.05963142]
+ -------------------------
+Translation x: 0
+Translation y: 0
+Rotation: 10
+MSE: TODO 
+Displacemnet: [-0.01858593  0.05533722]
+ -------------------------
+Translation x: 0
+Translation y: 0
+Rotation: 8
+MSE: TODO 
+Displacemnet: [-0.16863337  0.12540805]
+ -------------------------
+Translation x: 0
+Translation y: 0
+Rotation: 9
+MSE: TODO 
+Displacemnet: [-0.02133219  0.9741101 ]
+ -------------------------
+Translation x: 0
+Translation y: 0
+Rotation: 9
+MSE: TODO 
+Displacemnet: [-0.00246584  0.97216034]
+ -------------------------
+Translation x: 0
+Translation y: 0
+Rotation: 9
+MSE: TODO 
+Displacemnet: [1.3109756 2.123274 ]
+ -------------------------
+Translation x: 0
+Translation y: 0
+Rotation: 9
+MSE: TODO 
+Displacemnet: [1.3109756 2.123274 ]
+ -------------------------
+Translation x: 0
+Translation y: 0
+Rotation: 9
+MSE: TODO 
+Displacemnet: [-0.00246584  0.97216034]
+ -------------------------
+Translation x: 0
+Translation y: 0
+Rotation: 8
+MSE: TODO 
+Displacemnet: [-0.1448722  0.1647526]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 0
+MSE: TODO 
+Displacemnet: [ 1.8915524 -0.9119123]
+ -------------------------
+Translation x: 5
+Translation y: 5
+Rotation: 0
+MSE: TODO 
+Displacemnet: [4.842318 4.99523 ]
+ -------------------------
+Translation x: 15
+Translation y: 5
+Rotation: 0
+MSE: TODO 
+Displacemnet: [ 2.4992063 -2.8364217]
+ -------------------------
+Translation x: 15
+Translation y: 5
+Rotation: 0
+MSE: TODO 
+Displacemnet: [ 3.3406918 -2.8250184]
+ -------------------------
+Translation x: 15
+Translation y: 5
+Rotation: 0
+MSE: TODO 
+Displacemnet: [ 3.2247055 -2.7606335]
+ -------------------------
+Translation x: 15
+Translation y: 5
+Rotation: 0
+MSE: TODO 
+Displacemnet: [ 3.2456627 -2.72506  ]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 5
+MSE: TODO 
+Displacemnet: [9.826325  5.1114497]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 6
+MSE: TODO 
+Displacemnet: [9.775141 5.044399]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 7
+MSE: TODO 
+Displacemnet: [9.785524  5.0899854]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 10
+MSE: TODO 
+Displacemnet: [-1.0478413 -2.958403 ]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 10
+MSE: TODO 
+Displacemnet: [-1.0478413 -2.958403 ]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 10
+MSE: TODO 
+Displacemnet: [8.997229  5.2973485]
+ -------------------------
+Translation x: 10
+Translation y: 10
+Rotation: 10
+MSE: TODO 
+Displacemnet: [9.586252 9.138442]
+ -------------------------
+Translation x: 10
+Translation y: 10
+Rotation: 10
+MSE: TODO 
+Displacemnet: [9.586251 9.138424]
+ -------------------------
+Translation x: 10
+Translation y: 10
+Rotation: 10
+MSE: TODO 
+Displacemnet: [9.586251 9.138424]
+ -------------------------
+Translation x: 10
+Translation y: 10
+Rotation: 10
+MSE: TODO 
+Displacemnet: [9.586251 9.138424]
+ -------------------------
+Translation x: 10
+Translation y: 10
+Rotation: 10
+MSE: TODO 
+Displacemnet: [9.586251 9.138424]
+ -------------------------
+Translation x: 10
+Translation y: 10
+Rotation: 10
+MSE: TODO 
+Displacemnet: [9.586251 9.138424]
+ -------------------------
+Translation x: 10
+Translation y: 10
+Rotation: 10
+MSE: TODO 
+Displacemnet: [9.586251 9.138424]
+ -------------------------
+Translation x: 10
+Translation y: 10
+Rotation: 45
+MSE: TODO 
+Displacemnet: [ 9.27545   10.5715685]
+ -------------------------
+Translation x: 10
+Translation y: 10
+Rotation: 45
+MSE: TODO 
+Displacemnet: [ 9.27545   10.5715685]
+ -------------------------
+Translation x: 10
+Translation y: 10
+Rotation: 45
+MSE: TODO 
+Displacemnet: [ 9.27545   10.5715685]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 10
+MSE: 0 
+Displacemnet: [9.585816 4.340422]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 10
+MSE: 0 
+Displacemnet: [-1.0115879 -2.685762 ]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 9
+MSE: 0 
+Displacemnet: [3.4361198 2.5520456]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 8
+MSE: 0 
+Displacemnet: [3.6681302 2.5705054]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 7
+MSE: 0 
+Displacemnet: [9.769063 5.058504]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 7
+MSE: 0 
+Displacemnet: [9.769063 5.058504]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 7
+MSE: 0 
+Displacemnet: [9.227242  4.3583784]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 7
+MSE: 0 
+Displacemnet: [9.227242  4.3583784]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 7
+MSE: 0 
+Displacemnet: [9.227242  4.3583784]
+ -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 8
+MSE: 0 
+Displacemnet: [9.394217 4.286773]
+Image name: /home.stud/quangthi/ws/data/mnist/mnist_five_fix.png -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 9
+MSE: 0 
+Displacemnet: [9.517216 4.317201]
+Image name: /home.stud/quangthi/ws/data/mnist/mnist_five_fix.png -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 10
+MSE: 0 
+Displacemnet: [9.585816 4.340422]
+Image name: /home.stud/quangthi/ws/data/mnist/mnist_five_fix.png -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 12
+MSE: 0 
+Displacemnet: [9.716361 4.380034]
+Image name: /home.stud/quangthi/ws/data/mnist/mnist_five_fix.png -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 15
+MSE: 0 
+Displacemnet: [9.8026    4.6585016]
+Image name: /home.stud/quangthi/ws/data/mnist/mnist_five_fix.png -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 45
+MSE: 0 
+Displacemnet: [9.844148  5.6143756]
+Image name: /home.stud/quangthi/ws/data/mnist/mnist_five_fix.png -------------------------

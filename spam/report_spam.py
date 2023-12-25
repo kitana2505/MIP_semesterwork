@@ -17,8 +17,8 @@ import spam.DIC
 
 num_iter = 300
 x_trans = 10
-y_trans = 0
-rot_angle = 0
+y_trans = 10
+rot_angle = 45
 alpha = 0.5
 sc = 1
 
@@ -45,11 +45,11 @@ if __name__=="__main__":
                   verbose=True,                 # Show updates on every iterationclearcl
     )
 
-    img_transformed = spam.DIC.deform.applyPhiPython(img_move_with_kp, phi['Phi'])
+    img_transformed = spam.DIC.deform.applyPhiPython(img_moving, phi['Phi'])
     # phi2d = phi['Phi'][1:, 1:]
 
     # ipdb.set_trace()
-    overlay = plot_overlay(img_fix_with_kp, img_transformed/255.0, saved_path="overlay_spam.png")
+    overlay = plot_overlay(img_fix, img_transformed/255.0, saved_path="overlay_spam.png")
 
 
 

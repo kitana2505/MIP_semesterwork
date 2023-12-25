@@ -86,7 +86,8 @@ if __name__=="__main__":
     # usually, we have to balance the two losses by a hyper-parameter
     lambda_param = 0.05
     loss_weights = [1, lambda_param]
-
+    # total_lost = loss_mse + lambda_param * loss_l2
+    
     vxm_model.compile(optimizer='Adam', loss=losses, loss_weights=loss_weights)
 
     batch_size = 64

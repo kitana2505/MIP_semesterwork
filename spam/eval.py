@@ -37,7 +37,7 @@ if __name__ == "__main__":
     frame_height, frame_width = fix_frame.shape[:2]
     frame_size = tuple(map(int, [frame_width, frame_height]))
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    out = cv2.VideoWriter('output_spam.avi', fourcc, 20.0, frame_size)
+    out = cv2.VideoWriter('output_spam_1k5.avi', fourcc, 20.0, frame_size)
 
     squared_error = list()
     duration = list()
@@ -47,8 +47,8 @@ if __name__ == "__main__":
         Phi = spam.DIC.register(
                 move_frame, fix_frame,
                 margin=10,
-                maxIterations=300,
-                deltaPhiMin=0.01,
+                maxIterations=1500,
+                deltaPhiMin=0.001,
                 verbose=True
             )
         

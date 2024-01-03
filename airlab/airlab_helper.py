@@ -5,7 +5,7 @@ import cv2
 
 
 def register_airlab(returned_dict, dtype=torch.float32, device=torch.device("cuda:0"), num_iter=5000):
-        #overlay_ori = plot_overlay(returned_dict['img_fix_with_kp'], returned_dict['img_move_with_kp'], saved_path="overlay_ori.png")
+        
         img_fix = returned_dict['img_fix']
         img_moving = returned_dict['img_moving']
         fixed_image_ori = al.image_from_numpy(returned_dict['img_fix'], [1, 1], [0, 0], dtype=dtype, device=device)

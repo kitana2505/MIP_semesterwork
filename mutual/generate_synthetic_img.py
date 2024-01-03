@@ -1,3 +1,4 @@
+
 import numpy as np
 
 import matplotlib.pyplot as plt
@@ -34,24 +35,21 @@ thickness = -1
 alpha = 0.5
 cm_red = plt.get_cmap('Reds')
 cm_green = plt.get_cmap("Greens")
-#path = "/home.stud/quangthi/ws/semester_work/spam/bloodvessel.jpg"
+path = "/home.stud/quangthi/ws/semester_work/spam/bloodvessel.jpg"
 #path = "/home.stud/quangthi/ws/semester_work/spam/fix.png"
 # path = "/home.stud/quangthi/ws/data/mnist/mnist_five_fix.png"
-path = "/home.stud/quangthi/ws/data/mnist_five/153.png"
+#path = "/home.stud/quangthi/ws/data/mnist_five/153.png"
 RESIZE_HEIGHT = 128
 
+# this function is used to generate the synthetic moving image from the fixed image. input are translation, rotation parameters. Output is a dictionaty containing fixed image, moving image, keypoints, groundtruth keypoints after synthetic transformation, fixed image with keypoints, moving image with keypoints
 def generate_image(x_trans,y_trans,rot_angle,sc, img_fix_path=path,rs=(128, 128),change_size=False):  
+    
   
     img_fix= detect_keypoint.load_image(img_fix_path)
     
     height, width = img_fix.shape[:2]
     if change_size:
 
-        # resize by the ratio of heigh / width
-        # resize_width = int(RESIZE_HEIGHT * width / height / 10) * 10
-        # inshape = (RESIZE_HEIGHT, resize_width)
-        # new_size = (resize_width, RESIZE_HEIGHT)
-    # create moving image
         img_fix = cv2.resize(img_fix, rs)
     
         img_moving = detect_keypoint.transform_img(img_fix,center=(rs[0] / 2, rs[1] / 2), angle=rot_angle, scale=1, tx=x_trans,ty=y_trans)
@@ -104,6 +102,7 @@ def generate_image(x_trans,y_trans,rot_angle,sc, img_fix_path=path,rs=(128, 128)
 
     return return_dict
 
+# this function is used to plot the overlay image of the simpler vessels
 def plot_overlay(img_fix_with_kp,img_transformed, saved_path="out.png"):
 
     img_fix_red_with_kp = cm_red(img_fix_with_kp)
@@ -116,6 +115,7 @@ def plot_overlay(img_fix_with_kp,img_transformed, saved_path="out.png"):
 
     return overlay_image
 
+# this function is used to save the information of the transformation and the mse (to create report images)
 def save_info(x_trans,y_trans,rot_angle,sc,mse,method,option1,pathname=path):
     str_option = str(option1)
     with open(str(method)+'.txt', 'a') as f:

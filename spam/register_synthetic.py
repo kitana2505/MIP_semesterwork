@@ -24,7 +24,7 @@ sc = 1
 
 if __name__=="__main__":
     data_root = "/home.stud/quangthi/ws/data/segreg_anh"
-
+    # define translation and rotation parameter
     increment_trans = np.linspace(-5, 5, 100)
     increment_rot = np.linspace(-60, 60, 100)
 
@@ -33,6 +33,7 @@ if __name__=="__main__":
     rot_loss = list()
 
     for trans_val in tqdm(increment_trans):
+        # translate in x- and y-direction same, no rotation
         x_trans = trans_val
         y_trans = trans_val 
         rot_angle = 0
@@ -48,13 +49,14 @@ if __name__=="__main__":
                     verbose=True,                 # Show updates on every iterationclearcl
         )   
         
-        # mse_trans_loss = register_airlab(returned_dict, num_iter=num_iter)
+        
         img_transformed = spam.DIC.deform.applyPhiPython(img_moving, phi['Phi'])
 
         loss = (img_fix/255.0 - img_transformed/255.0)**2
         trans_loss.append(np.mean(loss))
 
     for rot_val in tqdm(increment_rot):
+        # only rotation, no translation
         x_trans = 0
         y_trans = 0
         rot_angle = rot_val
@@ -70,7 +72,7 @@ if __name__=="__main__":
                     verbose=True,                 # Show updates on every iterationclearcl
         )   
         
-        # mse_trans_loss = register_airlab(returned_dict, num_iter=num_iter)
+        
         img_transformed = spam.DIC.deform.applyPhiPython(img_moving, phi['Phi'])
 
         loss = (img_fix/255.0 - img_transformed/255.0)**2

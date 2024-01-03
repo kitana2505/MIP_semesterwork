@@ -342,3 +342,27 @@ Rotation: 45
 MSE: 0 
 Displacemnet: [9.844148  5.6143756]
 Image name: /home.stud/quangthi/ws/data/mnist/mnist_five_fix.png -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 45
+MSE: 0 
+Displacemnet: [-0.04895436  0.01744036]
+Image name: /home.stud/quangthi/ws/semester_work/spam/bloodvessel.jpg -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 1
+MSE: 0 
+Displacemnet: [9.821531 5.025497]
+Image name: /home.stud/quangthi/ws/semester_work/spam/bloodvessel.jpg -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 2
+MSE: 0 
+Displacemnet: [ 0.0092383 -0.9264286]
+Image name: /home.stud/quangthi/ws/semester_work/spam/bloodvessel.jpg -------------------------
+Translation x: 10
+Translation y: 5
+Rotation: 1
+MSE: 0 
+Displacemnet: [9.821531 5.025497]
+Image name: /home.stud/quangthi/ws/semester_work/spam/bloodvessel.jpg -------------------------

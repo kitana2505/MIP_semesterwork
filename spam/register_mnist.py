@@ -15,7 +15,7 @@ sc = 1
 
 
 if __name__== "__main__":
-
+    # load MNIST data
     mnist_five_dir = "../../data/mnist_five"
     mnist_five_files = glob.glob(os.path.join(mnist_five_dir, "*.png"))
 
@@ -25,7 +25,7 @@ if __name__== "__main__":
         mnist_five.append(img)
     
     mnist_five = np.array(mnist_five)
-
+    # choose the first image to be fixed image, the rest are moving images
     fix_image = mnist_five[0]
     moving_images = mnist_five[1:]
     
@@ -42,7 +42,6 @@ if __name__== "__main__":
         verbose=True,                 # Show updates on every iterationclearcl
     )
 
-        # ipdb.set_trace()
         # stack fixed_image and img_transformed
         img_transformed = spam.DIC.deform.applyPhiPython(moving_image, phi['Phi'])
 
@@ -59,6 +58,7 @@ if __name__== "__main__":
     print(f"Mean square error: {mse}")
     print(f"Frame per second: {fps}")
 
+    # store loss and fps in json file
     saved_dict = {"frame_loss" : squared_error, "mse": mse, "fps": fps}
 
     saved_dict["frame_loss"] = [float(x) for x in saved_dict["frame_loss"]]

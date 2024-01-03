@@ -1,3 +1,5 @@
+# this function is used to create the overlay image of the simpler vessels
+
 import cv2
 import numpy as np
 import ipdb
@@ -17,10 +19,10 @@ import time
 import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw
 
-num_iter = 5000
+num_iter = 2000
 x_trans = 10
 y_trans = 5
-rot_angle = 45
+rot_angle = 1
 alpha = 0.5
 sc = 1
 
@@ -39,21 +41,10 @@ if __name__=="__main__":
     img_fix = returned_dict['img_fix']
     img_fix_with_kp = returned_dict['img_fix_with_kp']
     img_move_with_kp = al.image_from_numpy(returned_dict['img_move_with_kp'], [1, 1], [0, 0], dtype=dtype, device=device)
-    # fixed_image_ori = al.image_from_numpy(returned_dict['img_fix'], [1, 1], [0, 0], dtype=dtype, device=device)
-    # moving_image_ori = al.image_from_numpy(returned_dict['img_moving'], [1, 1], [0, 0], dtype=dtype, device=device)
-   
-    #fixed_image_ori = al.image_from_numpy(returned_dict['img_fix_with_kp'], [1, 1], [0, 0], dtype=dtype, device=device)
+  
     fixed_image_ori = al.image_from_numpy(returned_dict['img_fix'], [1, 1], [0, 0], dtype=dtype, device=device)
 
-    #moving_image_ori = al.image_from_numpy(returned_dict['img_move_with_kp'], [1, 1], [0, 0], dtype=dtype, device=device)
     moving_image_ori = al.image_from_numpy(returned_dict['img_moving'], [1, 1], [0, 0], dtype=dtype, device=device)
-
-
-
-
-    # moving_image_ori = al.read_image_as_tensor(os.path.join(data_root, "moving.png"), dtype=dtype, device=device)
-
-    # img_move_with_kp = al.read_image_as_tensor(os.path.join(data_root, "img_move_with_kp.png"), dtype=dtype, device=device)
 
 
     fixed_image, moving_image = al.utils.normalize_images(fixed_image_ori, moving_image_ori)
@@ -103,20 +94,14 @@ if __name__=="__main__":
 
 
     warped_image = al.transformation.utils.warp_image(moving_image, displacement)
-    #warped_image = al.transformation.utils.warp_image(img_move_with_kp, displacement)
+ 
     img_transformed = warped_image.image.to('cpu').numpy()[0,0]
 
     saved_path = "./overlay_airlab.png"
-    #plot_overlay(img_fix_with_kp,img_transformed, saved_path)
+ 
     plot_overlay(img_fix,img_transformed*255, saved_path)
 
 
-    #img_fix_red_with_kp = cm_red(img_fix_with_kp)
-    #img_fix_red_with_kp = cm_red(img_fix)
-    #img_move_green_with_kp = cm_green(img_transformed)
-    #overlay_image = cv2.addWeighted(img_fix_red_with_kp, 1 - alpha, #img_move_green_with_kp, alpha, 0)
-
-    #Image.fromarray((overlay_image[:, :, :3] * 255).astype(np.uint8)).save(saved_path)
 
     print(f"Image is saved at {saved_path}")
     dist = al.transformation.utils.unit_displacement_to_displacement(displacement)
@@ -124,16 +109,5 @@ if __name__=="__main__":
     dist_temp = np.mean(np.mean(np.array(dist.cpu()),0),0)
     save_info(x_trans,y_trans,rot_angle,sc,registration.loss,"airlab",dist_temp)
     print("MSE = ", registration.loss)
-    # cv2.imwrite("out.png", img_transformed*255)
 
-    # plt.figure(3)    
-    # plt.imshow(img_fix,cmap='Reds')
-    # plt.scatter(keypoint[:,0], keypoint[:,1], color='red', marker='.', s=5)  
-
-    # plt.imread(os.path.join(data_root, "img_fix_red_with_kp.png"))
-    # plt.imshow(img_transformed, cmap="Greens", alpha=0.5)
-
-    # plt.scatter(gt_transformed[:,0], gt_transformed[:,1], color='green', marker='.', s=5,)  
-    # plt.title("Shift x = %s, shift y = %s, rotation = %s" % (str(x_trans), str(y_trans), str(rot_angle)))
-    # plt.savefig("overlay.png")
     

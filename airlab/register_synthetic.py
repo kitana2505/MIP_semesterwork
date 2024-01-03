@@ -32,6 +32,7 @@ if __name__=="__main__":
     dtype = torch.float32
     device = torch.device("cuda:0")
 
+    # define translation and rotation parameter
     increment_trans = np.linspace(-5, 5, 100)
     increment_rot = np.linspace(-60, 60, 100)
 
@@ -40,6 +41,7 @@ if __name__=="__main__":
     rot_loss = list()
 
     for trans_val in tqdm(increment_trans):
+        # translate in x- and y-direction the same amount, no rotation
         x_trans = trans_val
         y_trans = trans_val 
         rot_angle = 0
@@ -49,6 +51,7 @@ if __name__=="__main__":
         trans_loss.append(mse_trans_loss)
 
     for rot_val in tqdm(increment_rot):
+        # only rotation, no translation
         x_trans = 0
         y_trans = 0
         rot_angle = rot_val
@@ -62,7 +65,7 @@ if __name__=="__main__":
         "trans_loss": trans_loss,
         "rot_loss": rot_loss
     }
-
+    
     with open("mse_synthetic.json", "w") as f:
         json.dump(mse_synthetic, f, indent = 4)
 

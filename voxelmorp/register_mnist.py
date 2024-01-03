@@ -14,7 +14,7 @@ import glob
 import json
 
 if __name__== "__main__":
-
+    # load MNIST data
     mnist_five_dir = "../../data/mnist_five"
     mnist_five_files = glob.glob(os.path.join(mnist_five_dir, "*.png"))
 
@@ -28,7 +28,7 @@ if __name__== "__main__":
     fix_image = mnist_five[0]
     fix_image = np.pad(fix_image, ((2, 2), (2, 2)), mode='constant') / 255.0  # Pad with zeros to have shape (32, 32)
     moving_images = mnist_five[1:]
-
+    #define input shape and number of features
     inshape = (32, 32) 
     
     # configure unet features
@@ -36,6 +36,7 @@ if __name__== "__main__":
         [32, 32, 32, 32],         # encoder features
         [32, 32, 32, 32, 32, 16]  # decoder features
     ]
+    # build model
     vxm_model = vxm.networks.VxmDense(inshape, nb_features, int_steps=0)
 
     # load trained checkpoint
@@ -72,7 +73,7 @@ if __name__== "__main__":
     mse = sum(squared_error) / len(squared_error)
     print(f"Mean square error: {mse}")
     print(f"Frame per second: {fps}")
-
+    # save loss and fps to json file
     saved_dict = {"frame_loss" : squared_error, "mse": mse, "fps": fps}
 
     with open("mse_mnist.json", 'w') as file:
